@@ -79,7 +79,7 @@ export const obtenerProfesores = async (): Promise<Profesor[]> => {
   return result.rows;
 }
 
-
+// Crear una nueva certificación
 export const crearCertificacion = async (certificacionData: Certificacion) => {
   const { profesor_id, nombre, institucion, fecha_obtencion, archivo } = certificacionData;
 
