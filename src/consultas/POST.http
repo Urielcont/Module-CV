@@ -1,23 +1,37 @@
 # Formatos esperados para cada endpoint POST de la API
 
-# VALIDAR CREACION DE NUEVOS USUARIOS
-    POST http://localhost:4000/api/profesor/new HTTP/1.1
+# # VALIDAR CREACION DE NUEVOS USUARIOS
+#     POST http://localhost:4000/api/profesor/new HTTP/1.1
+#     Content-Type: application/json
+
+# {
+#   "nombre": "Dago",
+#   "apellido_paterno": "berto",
+#   "apellido_materno": "González",
+#   "correo": "otro2.gonza@correo.com",
+#   "curp": "DAGO850101HDFNNN09",
+#   "matricula": "2234567890",
+#   "fecha_nacimiento": "1985-01-01",
+#   "calle": "Calle Ficticia 123",
+#   "codigo_postal": "0100",
+#   "colonia": "Centro", 
+#   "numero_int": "12B", 
+#   "numero_ext": "32",
+#   "celular": "5551134567",
+#   "tipo_sangre": "O+",
+#   "resumen_profesional": "Profesor con más de 10 años de experiencia en la enseñanza de Programacion."
+# }
+
+
+
+# VALIDAR CREACION DE CERTIFICADOS
+    POST http://localhost:4000/api/profesor/certificacion HTTP/1.1
     Content-Type: application/json
 
 {
-  "nombre": "Dago",
-  "apellido_paterno": "berto",
-  "apellido_materno": "González",
-  "correo": "otro2.gonza@correo.com",
-  "curp": "DAGO850101HDFNNN09",
-  "matricula": "2234567890",
-  "fecha_nacimiento": "1985-01-01",
-  "calle": "Calle Ficticia 123",
-  "codigo_postal": "0100",
-  "colonia": "Centro", 
-  "numero_int": "12B", 
-  "numero_ext": "32",
-  "celular": "5551134567",
-  "tipo_sangre": "O+",
-  "resumen_profesional": "Profesor con más de 10 años de experiencia en la enseñanza de Programacion."
+  "profesor_id": 1,
+  "nombre": "Certificado de Programación",
+  "institucion": "Universidad de Durango",
+  "fecha_obtencion": "2010-01-01",
+  "archivo": "certificado-mlp.pdf"
 }

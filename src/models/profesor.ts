@@ -15,3 +15,11 @@ export interface Profesor {
   tipo_sangre: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-'; // Valores
   resumen_profesional: string;
 }
+
+export interface Certificacion {
+  profesor_id: number;
+  nombre: string;
+  institucion: string;
+  fecha_obtencion: Date;
+  archivo?: string | null;
+}

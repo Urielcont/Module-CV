@@ -1,5 +1,5 @@
 import { conexionDB } from "../config/configDb";
-import { Profesor } from "../models/profesor";
+import { Profesor,Certificacion } from "../models/profesor";
 
 // Verifica si el email ya está registrado
 export const verificarEmail = async (email: string): Promise<boolean> => {
@@ -78,3 +78,19 @@ export const obtenerProfesores = async (): Promise<Profesor[]> => {
   const result = await conexionDB.query("SELECT * FROM profesores");
   return result.rows;
 }
+
+
+export const crearCertificacion = async (certificacionData: Certificacion) => {
+  const { profesor_id, nombre, institucion, fecha_obtencion, archivo } = certificacionData;
+
+  const query = `
+    INSERT INTO certificaciones (id_profesor, nombre, institucion, fecha, archivo_path)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+  `;
+
+  const values = [profesor_id, nombre, institucion, fecha_obtencion, archivo || null];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+};

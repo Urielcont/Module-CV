@@ -90,3 +90,29 @@ export const validationProfesor = {
     },
   };
   
+
+  export const validationCertificado = {
+    profesor_id: {
+      "number.base": "El ID del profesor debe ser un número",
+      "any.required": "El ID del profesor es obligatorio",
+    },
+    nombre:{
+      "string.base": "El nombre de la certificación debe ser un texto",
+      "string.max": "El nombre de la certificación no debe exceder los 255 caracteres",
+      "any.required": "El nombre de la certificación es obligatorio",
+    },
+    institucion: {
+      "string.base": "La institución debe ser un texto",
+      "string.max": "La institución no debe exceder los 255 caracteres",
+      "any.required": "La institución es obligatoria",
+    },
+    fecha_obtencion: {
+      "date.base": "La fecha de obtención debe ser una fecha válida",
+      "any.required": "La fecha de obtención es obligatoria",
+    },
+    archivo: {
+       "string.base": "El archivo debe ser una ruta de texto",
+      "string.max": "El archivo no debe exceder los 255 caracteres",
+    },
+  };
+  

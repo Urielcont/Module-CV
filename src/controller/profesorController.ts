@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { verificarEmail, crearProfesor,obtenerProfesores } from "../services/profesorService";
+import { verificarEmail, crearProfesor,obtenerProfesores,crearCertificacion } from "../services/profesorService";
 
 
 export const newProfesor = async (req: Request, res: Response): Promise<void> => {
@@ -40,6 +40,27 @@ export const getProfesores = async (req: Request, res: Response): Promise<void> 
     console.error('Error al obtener los profesores: ', err.message); 
       res.status(500).json({
       error: "Error interno al procesar la solicitud. Intenta nuevamente más tarde.",
+    });
+  }
+};
+
+
+// Agregar certificación a un profesor
+export const agregarCertificacion = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const certificacionData = req.body;
+    
+    const nuevaCertificacion = await crearCertificacion(certificacionData);
+
+    res.status(201).json({
+      message: "Certificación registrada exitosamente",
+      certificacion: nuevaCertificacion,
+    });
+  } catch (error) {
+    console.error("Error al registrar certificación:", error);
+
+    res.status(500).json({
+      error: "Error interno al registrar la certificación. Intenta nuevamente.",
     });
   }
 };
