@@ -1,5 +1,5 @@
 import { conexionDB } from "../config/configDb";
-import { Profesor,Certificacion } from "../models/profesor";
+import { Profesor,Certificacion, Aptitudes } from "../models/profesor";
 
 // Verifica si el email ya está registrado
 export const verificarEmail = async (email: string): Promise<boolean> => {
@@ -94,3 +94,20 @@ export const crearCertificacion = async (certificacionData: Certificacion) => {
   const { rows } = await conexionDB.query(query, values);
   return rows[0];
 };
+
+// Crear una nueva aptitud
+export const crearAptitud = async (aptitudData: Aptitudes) => {
+  const { profesor_id, aptitud, descripcion } = aptitudData;
+
+  // Query para registrar la aptitud
+  const query = `
+    INSERT INTO aptitudes (id_profesor, aptitud, descripcion)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+  `;
+
+  const values = [profesor_id, aptitud, descripcion || null];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+}

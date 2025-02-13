@@ -23,3 +23,10 @@ export interface Certificacion {
   fecha_obtencion: Date;
   archivo?: string | null;
 }
+
+
+export interface Aptitudes {
+  profesor_id: number;
+  aptitud: string;
+  descripcion?: string | null;
+}

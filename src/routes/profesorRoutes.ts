@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments  } from "celebrate";
-import { validationProfesor, validationCertificado } from "../validation/profesorValidation";
-import { newProfesor, getProfesores, agregarCertificacion} from "../controller/profesorController";
+import { validationProfesor, validationCertificado,validationAptitudes } from "../validation/profesorValidation";
+import { newProfesor, getProfesores, agregarCertificacion,agregarAptitudes} from "../controller/profesorController";
 const router = Router();
 
 
@@ -84,6 +84,24 @@ router.post(
   agregarCertificacion
 );
 
+
+/**
+* @route POST /api/profesor/aptitudes
+* @desc Agregar aptitudes a un profesor
+* @access private
+
+*/
+router.post(
+  "/aptitudes",
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      profesor_id: Joi.number().integer().required().messages(validationAptitudes.profesor_id),
+      aptitud: Joi.string().max(255).required().messages(validationAptitudes.aptitud),
+      descripcion: Joi.string().max(255).allow("", null).messages(validationAptitudes.descripcion),
+    }),
+  }),
+  agregarAptitudes
+);
 
 
 
