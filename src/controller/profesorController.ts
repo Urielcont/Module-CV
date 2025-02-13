@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { verificarEmail, crearProfesor } from "../services/profesorService";
+import { verificarEmail, crearProfesor,obtenerProfesores } from "../services/profesorService";
 
 
 export const newProfesor = async (req: Request, res: Response): Promise<void> => {
@@ -22,6 +22,22 @@ export const newProfesor = async (req: Request, res: Response): Promise<void> =>
     });
   } catch (err) {
     console.error('Error al registrar el profesor: ', err.message); 
+      res.status(500).json({
+      error: "Error interno al procesar la solicitud. Intenta nuevamente más tarde.",
+    });
+  }
+};
+
+export const getProfesores = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // Obtener los profesores
+    const profesores = await obtenerProfesores();
+
+    // Enviar respuesta con los profesores
+    res.status(200).json({
+      profesores});
+    } catch (err) {
+    console.error('Error al obtener los profesores: ', err.message); 
       res.status(500).json({
       error: "Error interno al procesar la solicitud. Intenta nuevamente más tarde.",
     });

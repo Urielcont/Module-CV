@@ -1,0 +1,5 @@
+# Formatos esperados para cada endpoint POST de la API
+
+# VALIDAR CREACION DE NUEVOS USUARIOS
+    GET http://localhost:4000/api/profesor HTTP/1.1
+  

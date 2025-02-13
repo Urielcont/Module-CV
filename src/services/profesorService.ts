@@ -71,3 +71,10 @@ export const crearProfesor = async (profesorData: Profesor): Promise<any> => {
 
   return result.rows[0];  // Devuelve el profesor recién creado
 };
+
+
+// Obten todos los profesores
+export const obtenerProfesores = async (): Promise<Profesor[]> => {
+  const result = await conexionDB.query("SELECT * FROM profesores");
+  return result.rows;
+}

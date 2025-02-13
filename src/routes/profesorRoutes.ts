@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments  } from "celebrate";
 import { validationProfesor } from "../validation/profesorValidation";
-import { newProfesor } from "../controller/profesorController";
+import { newProfesor, getProfesores } from "../controller/profesorController";
 const router = Router();
 
 
@@ -53,6 +53,15 @@ router.post(
   }),
   newProfesor
 );
+
+
+/**
+* @route GET /api/profesor/
+* @desc Obtener los dato basicos de todos los profesores
+* @access private
+
+*/
+router.get("/", getProfesores);
 
 module.exports = router;
 
