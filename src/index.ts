@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "", // URL de frontend
+    origin: "*", // URL de frontend
     credentials: true, // Permite cookies y tokens en las solicitudes
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
   })
