@@ -4,6 +4,8 @@ import express from "express";
 import cvRoutes from "./routes/profesorRoutes";
 import { testConnection } from "./config/configDb";
 // import morgan from "morgan";
+import { errors } from "celebrate";
+import { errorHandler } from "./middleware/errorCelebrate";
 import cors from 'cors';
 
 // servidor de express
@@ -27,7 +29,9 @@ app.get("/", (req, res) => {
   res.send("Servidor funcionando");
 });
 
-
+app.use(errors());
+// Middleware para manejar errores
+app.use(errorHandler);
 
 // Funcion para inicar el servidor en el puerto establecido
 const startServerExpress = async () => {
