@@ -1,7 +1,7 @@
 import { loadEnv } from "./config/env";
 loadEnv()
 import express from "express";
-import cvRoutes from "./routes/cvRoutes";
+import cvRoutes from "./routes/profesorRoutes";
 import { testConnection } from "./config/configDb";
 // import morgan from "morgan";
 import cors from 'cors';
@@ -21,7 +21,7 @@ app.use(
 app.use(express.json());
 
 // Rutas
-app.use("/api/cv", cvRoutes);
+app.use("/api/profesor", cvRoutes);
 // PRUEBA
 app.get("/", (req, res) => {
   res.send("Servidor funcionando");
