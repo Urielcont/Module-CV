@@ -10,6 +10,7 @@ export const verificarEmail = async (email: string): Promise<boolean> => {
 // Crea un nuevo profesor
 export const crearProfesor = async (profesorData: Profesor): Promise<any> => {
   const {
+    user_id,
     nombre,
     apellido_paterno,
     apellido_materno,
@@ -46,9 +47,10 @@ export const crearProfesor = async (profesorData: Profesor): Promise<any> => {
       numero_ext,
       celular,
       tipo_sangre,
-      resumen_profesional
+      resumen_profesional,
+      user_id
     ) VALUES (
-      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
+      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
     ) RETURNING *`,
     [
       nombre,
@@ -65,7 +67,8 @@ export const crearProfesor = async (profesorData: Profesor): Promise<any> => {
       numero_ext,
       celular,
       tipo_sangre,
-      resumen_profesional
+      resumen_profesional,
+      user_id
     ]
   );
 

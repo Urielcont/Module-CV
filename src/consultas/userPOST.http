@@ -1,0 +1,8 @@
+# ENPOINT PARA CREAR Logros
+  POST http://localhost:4000/api/auth/login HTTP/1.1
+    Content-Type: application/json
+
+{
+  "email":"uasna@gmail.com",
+  "password":"1234abcDE"
+}

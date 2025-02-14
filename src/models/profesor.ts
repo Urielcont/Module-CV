@@ -1,6 +1,7 @@
 import exp from "constants";
 
 export interface Profesor {
+  user_id: number;
   nombre: string;
   apellido_paterno: string;
   apellido_materno?: string | null;
