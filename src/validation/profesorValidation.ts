@@ -1,4 +1,9 @@
 export const validationProfesor = {
+    user_id: {
+      'number.base': '"user_id" debe ser un número',
+      'any.required': '"user_id" es un campo obligatorio',
+      'number.empty': '"user_id" no puede estar vacío',
+    },
     nombre: {
       'string.base': '"nombre" debe ser un texto',
       'string.empty': '"nombre" no puede estar vacío',

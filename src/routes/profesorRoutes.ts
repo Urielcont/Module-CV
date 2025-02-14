@@ -34,7 +34,7 @@ router.post(
   "/new",
   celebrate({
     [Segments.BODY]: Joi.object({
-      user_id: Joi.number().integer().required(),
+      user_id: Joi.number().integer().required().messages(validationProfesor.user_id),
       nombre: Joi.string().min(1).max(50).required().messages(validationProfesor.nombre),
       apellido_paterno: Joi.string().min(1).max(50).required().messages(validationProfesor.apellido_paterno),
       apellido_materno: Joi.string().min(1).max(50).required().messages(validationProfesor.apellido_materno),
