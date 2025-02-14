@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export interface Profesor {
   nombre: string;
   apellido_paterno: string;
@@ -29,4 +31,44 @@ export interface Aptitudes {
   profesor_id: number;
   aptitud: string;
   descripcion?: string | null;
+}
+
+
+export interface Educacion {
+  cedula_profesional: string;
+  tipo:string;
+  carrera: string;
+  institucion: string;
+  fecha_ingreso: Date;
+  fecha_egreso: Date;
+  anotaciones?: string | null;
+  profesor_id: number;
+  cedula_path: string;
+}
+
+export interface Experiencia {
+  empresa: string;
+  cargo: string;
+  fecha_inicio: Date;
+  fecha_finalizacion: Date;
+  referencias: string;
+  anotaciones?: string | null;
+  actual: boolean;
+  funciones: string;
+  profesor_id: number;
+}
+
+export interface Idioma {
+  idioma: string;
+  nivel: string;
+  certificado: string;
+  profesor_id: number;
+}
+
+export interface Logros{
+    nombre: string;
+    institucion: string;
+    fecha: Date;
+    tipo: string;
+    profesor_id: number;
 }

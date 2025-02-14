@@ -37,11 +37,68 @@
 # }
 
 # VALIDAR CREACION DE CERTIFICADOS
-    POST http://localhost:4000/api/profesor/aptitudes HTTP/1.1
+#     POST http://localhost:4000/api/profesor/aptitudes HTTP/1.1
+#     Content-Type: application/json
+
+# {
+#   "profesor_id": 1,
+#   "aptitud": "Trabajo en equipo",
+#   "descripcion": "Capacidad para trabajar en equipo y lograr objetivos comunes."
+# }
+
+
+# ENPOINT PARA CREAR EDUCACION
+#     POST http://localhost:4000/api/profesor/educacion HTTP/1.1
+#     Content-Type: application/json
+
+# {
+#   "profesor_id": 1,
+#   "tipo": "Licenciatura",
+#   "cedula_profesional": "1234567890",
+#   "carrera": "Ingeniería en Sistemas",
+#   "institucion": "Universidad Nacional",
+#   "fecha_ingreso": "2015-08-01",
+#   "fecha_egreso": "2020-06-30",
+#   "anotaciones": "Graduado con honores",
+#   "cedula_path": "documentos/cedula_1.jpg"
+# }
+
+
+# ENPOINT PARA CREAR EXPERIENCIA
+#   POST http://localhost:4000/api/profesor/experiencia HTTP/1.1
+#     Content-Type: application/json
+
+# {
+#   "profesor_id": 1,
+#   "empresa": "Tech Corp",
+#   "cargo": "Desarrollador Senior",
+#   "fecha_inicio": "2021-01-10",
+#   "fecha_finalizacion": "2023-12-15",
+#   "referencias": "Carlos López - Gerente",
+#   "anotaciones": "Trabajó en el equipo de backend",
+#   "actual": false
+# }
+
+
+# ENPOINT PARA CREAR IDIOMAS
+#   POST http://localhost:4000/api/profesor/idiomas HTTP/1.1
+#     Content-Type: application/json
+
+# {
+#   "profesor_id": 1,
+#   "idioma": "Inglés",
+#   "nivel": "avanzado",
+#   "certificado": "TOEFL C1"
+# }
+
+# ENPOINT PARA CREAR Logros
+  POST http://localhost:4000/api/profesor/logros HTTP/1.1
     Content-Type: application/json
 
 {
   "profesor_id": 1,
-  "aptitud": "Trabajo en equipo",
-  "descripcion": "Capacidad para trabajar en equipo y lograr objetivos comunes."
+  "nombre": "Premio a la Innovación",
+  "institucion": "Asociación de Ingenieros",
+  "fecha": "2022-11-05",
+  "tipo": "Reconocimiento Profesional"
 }

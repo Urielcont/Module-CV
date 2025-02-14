@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments  } from "celebrate";
 import { validationProfesor, validationCertificado,validationAptitudes } from "../validation/profesorValidation";
-import { newProfesor, getProfesores, agregarCertificacion,agregarAptitudes} from "../controller/profesorController";
+import { newProfesor, getProfesores, agregarCertificacion,agregarAptitudes, agregarEducacion, agregarExperiencia, agregarIdiomas, agregarLogros} from "../controller/profesorController";
 const router = Router();
 
 
@@ -101,6 +101,94 @@ router.post(
     }),
   }),
   agregarAptitudes
+);
+
+
+/**
+* @route POST /api/profesor/educacion
+* @desc Agregar educacion de un profesor
+* @access private
+
+*/
+router.post(
+  "/educacion",
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      cedula_profesional: Joi.string().max(20).required(),
+      tipo: Joi.string().max(255).required(),
+      carrera: Joi.string().max(255).optional(),
+      institucion: Joi.string().max(255).optional(),
+      fecha_ingreso: Joi.date().max(new Date()).optional(),
+      fecha_egreso: Joi.date().max(new Date()).optional(),
+      anotaciones: Joi.string().max(255).optional(),
+      profesor_id: Joi.number().integer().required(),
+      cedula_path: Joi.string().max(255).optional()
+    }),
+  }),
+  agregarEducacion
+);
+
+/**
+* @route POST /api/profesor/experiencia
+* @desc Agregar experiencia de un profesor
+* @access private
+
+*/
+router.post(
+  "/experiencia",
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      empresa: Joi.string().max(255).required(),
+      cargo: Joi.string().max(255).optional(),
+      fecha_inicio: Joi.date().max(new Date()).optional(),
+      fecha_finalizacion: Joi.date().max(new Date()).optional(),
+      referencias: Joi.string().max(255).optional(),
+      anotaciones: Joi.string().max(255).optional(),
+      actual: Joi.boolean().optional(),
+      profesor_id: Joi.number().integer().required(),
+    }),
+  }),
+  agregarExperiencia
+);
+
+/**
+* @route POST /api/profesor/idiomas
+* @desc Agregar Idiomas de un profesor
+* @access private
+
+*/
+router.post(
+  "/idiomas",
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      idioma: Joi.string().max(100).required(),
+      nivel: Joi.string().valid("básico", "intermedio", "avanzado", "nativo").required(),
+      certificado: Joi.string().max(255).optional(),
+      profesor_id: Joi.number().integer().required()
+    }),
+  }),
+  agregarIdiomas
+);
+
+
+/**
+* @route POST /api/profesor/logros
+* @desc Agregar logros de un profesor
+* @access private
+
+*/
+router.post(
+  "/logros",
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      nombre: Joi.string().max(255).required(),
+      institucion: Joi.string().max(255).required(),
+      fecha: Joi.date().max(new Date()).optional(),
+      tipo: Joi.string().max(255).optional(),
+      profesor_id: Joi.number().integer().required(),
+    }),
+  }),
+  agregarLogros
 );
 
 

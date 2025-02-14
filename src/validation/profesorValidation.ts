@@ -133,4 +133,22 @@ export const validationProfesor = {
       "any.required": "La descripcion es obligatoria",
     }
   };
+
+
+  export const validationEducation = {
+    profesor_id: {
+      "number.base": "El ID del profesor debe ser un número",
+      "any.required": "El ID del profesor es obligatorio",
+    },
+    aptitud:{
+      "string.base": "La aptitud debe ser un texto",
+      "string.max": "La aptitud no debe exceder los 255 caracteres",
+      "any.required": "La aptitud es obligatorio",
+    },
+    descripcion: {
+      "string.base": "La descripcion debe ser un texto",
+      "string.max": "La descripcion no debe exceder los 255 caracteres",
+      "any.required": "La descripcion es obligatoria",
+    }
+  };
   

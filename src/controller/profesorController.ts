@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { verificarEmail, crearProfesor,obtenerProfesores,crearCertificacion,crearAptitud } from "../services/profesorService";
+import { verificarEmail, crearProfesor,obtenerProfesores,crearCertificacion,crearAptitud, crearEducacion, crearExperiencia, crearIdioma, crearLogros } from "../services/profesorService";
 
 
 export const newProfesor = async (req: Request, res: Response): Promise<void> => {
@@ -82,3 +82,76 @@ export const agregarAptitudes = async (req: Request, res: Response): Promise<voi
     });
   }
 }
+export const agregarEducacion = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const educacionData = req.body;
+    const nuevaEducacion = await crearEducacion(educacionData);
+
+    res.status(201).json({
+      message: "Educación registrada exitosamente",
+      data: nuevaEducacion,
+    });
+  } catch (error) {
+    console.error("Error al registrar Educación:", error);
+
+    res.status(error instanceof Error ? 400 : 500).json({
+      error: error instanceof Error ? error.message : "Error interno al registrar la educación. Intenta nuevamente.",
+    });
+  }
+};
+
+export const agregarExperiencia = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const experienciaData= req.body;
+    const nuevaExperiencia = await crearExperiencia(experienciaData);
+
+    res.status(201).json({
+      message: "Experiencia registrada exitosamente",
+      data: nuevaExperiencia,
+    });
+  } catch (error) {
+    console.error("Error al registrar Experiencia:", error);
+
+    res.status(error instanceof Error ? 400 : 500).json({
+      error: error instanceof Error ? error.message : "Error interno al registrar la experiencia. Intenta nuevamente.",
+    });
+  }
+};
+
+export const agregarIdiomas = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const idiomasData= req.body;
+    const nuevoIdioma = await crearIdioma(idiomasData);
+
+    res.status(201).json({
+      message: "Idioma registrado exitosamente",
+      data: nuevoIdioma,
+    });
+  } catch (error) {
+    console.error("Error al registrar Idioma:", error);
+
+    res.status(error instanceof Error ? 400 : 500).json({
+      error: error instanceof Error ? error.message : "Error interno al registrar el idioma. Intenta nuevamente.",
+    });
+  }
+};
+
+export const agregarLogros = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const logroData
+     = req.body;
+    const nuevoLogro = await crearLogros(logroData);
+
+    res.status(201).json({
+      message: "Logro registrado exitosamente",
+      data: nuevoLogro,
+    });
+  } catch (error) {
+    console.error("Error al registrar Logro:", error);
+
+    res.status(error instanceof Error ? 400 : 500).json({
+      error: error instanceof Error ? error.message : "Error interno al registrar el logro. Intenta nuevamente.",
+    });
+  }
+};
+

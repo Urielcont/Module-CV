@@ -1,5 +1,5 @@
 import { conexionDB } from "../config/configDb";
-import { Profesor,Certificacion, Aptitudes } from "../models/profesor";
+import { Profesor,Certificacion, Aptitudes, Educacion, Experiencia, Idioma, Logros } from "../models/profesor";
 
 // Verifica si el email ya está registrado
 export const verificarEmail = async (email: string): Promise<boolean> => {
@@ -107,6 +107,72 @@ export const crearAptitud = async (aptitudData: Aptitudes) => {
   `;
 
   const values = [profesor_id, aptitud, descripcion || null];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+}
+
+export const crearEducacion = async (educacionData: Educacion) => {
+  const {cedula_profesional, tipo, carrera, institucion, fecha_ingreso, fecha_egreso, anotaciones, profesor_id, cedula_path } = educacionData;
+
+  // Query para registrar valores en educacion
+  const query = `
+    INSERT INTO educacion (cedula_profesional, tipo, carrera, institucion, fecha_ingreso, fecha_egreso, anotaciones, id_profesor, cedula_path)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *;
+  `;
+  
+  const values = [cedula_profesional, tipo, carrera, institucion, fecha_ingreso, fecha_egreso, anotaciones, profesor_id, cedula_path];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+}
+
+
+export const crearExperiencia = async (aptitudData: Experiencia) => {
+  const {profesor_id, empresa, cargo, fecha_inicio, fecha_finalizacion, referencias, anotaciones, actual, funciones } = aptitudData;
+
+  // Query para registrar la aptitud
+  const query = `
+    INSERT INTO experiencia_laboral (id_profesor, empresa, cargo, fecha_inicio, fecha_finalizacion, referencia, anotaciones, actual, funciones)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *;
+  `;
+
+  const values = [profesor_id, empresa, cargo, fecha_inicio, fecha_finalizacion, referencias, anotaciones, actual, funciones];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+}
+
+export const crearIdioma = async (aptitudData: Idioma) => {
+  const { profesor_id, idioma, nivel, certificado } = aptitudData;
+
+  // Query para registrar la aptitud
+  const query = `
+    INSERT INTO idiomas (id_profesor, idioma, nivel, certificado)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *;
+  `;
+
+  const values = [profesor_id, idioma, nivel, certificado];
+
+  const { rows } = await conexionDB.query(query, values);
+  return rows[0];
+}
+
+
+export const crearLogros = async (aptitudData: Logros) => {
+  const { profesor_id, nombre, institucion, fecha, tipo } = aptitudData;
+
+  // Query para registrar la aptitud
+  const query = `
+    INSERT INTO logros_reconocimientos (id_profesor, nombre, institucion, fecha, tipo)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+  `;
+
+  const values = [profesor_id, nombre, institucion, fecha, tipo];
 
   const { rows } = await conexionDB.query(query, values);
   return rows[0];
