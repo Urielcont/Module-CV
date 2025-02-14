@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { celebrate, Joi, Segments  } from "celebrate";
 import { validationProfesor, validationCertificado,validationAptitudes } from "../validation/profesorValidation";
-import { newProfesor, getProfesores, agregarCertificacion,agregarAptitudes, agregarEducacion, agregarExperiencia, agregarIdiomas, agregarLogros, getCvComplete} from "../controller/profesorController";
+import { newProfesor, getProfesores,getCvByUserId, agregarCertificacion,agregarAptitudes, agregarEducacion, agregarExperiencia, agregarIdiomas, agregarLogros, getCvComplete} from "../controller/profesorController";
 const router = Router();
 
 
@@ -199,7 +199,10 @@ router.post(
 * @access private
 
 */
+// Obtener los datos del CV por el id del profesor
 router.get("/cv/:profesor_id", getCvComplete);
+// Obtener los datos del CV por el id del usuario
+router.get("/cv/user/:user_id", getCvByUserId );
 
 
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { verificarEmail, crearProfesor,obtenerProfesores,crearCertificacion,crearAptitud, crearEducacion, crearExperiencia, crearIdioma, crearLogros } from "../services/profesorService";
-import { obtenerProfesorPorId, obtenerEducacionPorProfesor, obtenerExperienciaPorProfesor, obtenerIdiomasPorProfesor, obtenerLogrosPorProfesor, obtenerAptitudesPorProfesor, obtenerCertificacinesPorProfesor } from "../services/profesorByIdService";
+import { obtenerProfesorPorId, obtenerEducacionPorProfesor, obtenerExperienciaPorProfesor, obtenerIdiomasPorProfesor, obtenerLogrosPorProfesor, obtenerCvPorUsuario, obtenerAptitudesPorProfesor, obtenerCertificacinesPorProfesor } from "../services/profesorByIdService";
 
 export const newProfesor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -204,5 +204,29 @@ export const getCvComplete = async (req: Request, res: Response): Promise<void> 
     res.status(500).json({
       error: "Error interno al procesar la solicitud. Intenta nuevamente más tarde.",
     });
+  }
+};
+
+export const getCvByUserId = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { user_id } = req.params;
+
+    if (!user_id) {
+      res.status(400).json({ error: "El ID del usuario es obligatorio" });
+      return;
+    }
+
+    // Obtener el CV completo de todos los profesores asociados al usuario
+    const cv = await obtenerCvPorUsuario(Number(user_id));
+
+    if (!cv || cv.length === 0) {
+      res.status(404).json({ error: "Usuario no encontrado o sin CV" });
+      return;
+    }
+
+    res.status(200).json(cv);
+  } catch (error) {
+    console.error('Error al obtener el CV del usuario:', error);
+    res.status(500).json({ error: "Error interno al procesar la solicitud" });
   }
 };
