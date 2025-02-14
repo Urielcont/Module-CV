@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { verificarEmail, crearProfesor,obtenerProfesores,crearCertificacion,crearAptitud, crearEducacion, crearExperiencia, crearIdioma, crearLogros } from "../services/profesorService";
-
+import { obtenerProfesorPorId, obtenerEducacionPorProfesor, obtenerExperienciaPorProfesor, obtenerIdiomasPorProfesor, obtenerLogrosPorProfesor, obtenerAptitudesPorProfesor, obtenerCertificacinesPorProfesor } from "../services/profesorByIdService";
 
 export const newProfesor = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -155,3 +155,54 @@ export const agregarLogros = async (req: Request, res: Response): Promise<void> 
   }
 };
 
+export const getCvComplete = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { profesor_id } = req.params; // Recibir el ID del profesor
+
+    if (!profesor_id) {
+      res.status(400).json({ error: "El ID del profesor es obligatorio" });
+      return;
+    }
+
+    // Convertir profesor_id a número
+    const profesorIdNumber = Number(profesor_id);
+
+    if (isNaN(profesorIdNumber)) {
+      res.status(400).json({ error: "El ID del profesor debe ser un número válido" });
+      return;
+    }
+
+    // Obtener información del profesor
+    const profesor = await obtenerProfesorPorId(profesorIdNumber);
+
+    if (!profesor) {
+      res.status(404).json({ error: "Profesor no encontrado" });
+      return;
+    }
+
+    // Obtener datos relacionados
+    const aptitudes = await obtenerAptitudesPorProfesor(profesorIdNumber);
+    const certificacion = await obtenerCertificacinesPorProfesor(profesorIdNumber);
+    const educacion = await obtenerEducacionPorProfesor(profesorIdNumber);
+    const experiencia = await obtenerExperienciaPorProfesor(profesorIdNumber);
+    const idiomas = await obtenerIdiomasPorProfesor(profesorIdNumber);
+    const logros = await obtenerLogrosPorProfesor(profesorIdNumber);
+
+    // Enviar respuesta con el CV completo
+    res.status(200).json({
+      profesor,
+      aptitudes,
+      certificacion,
+      educacion,
+      experiencia,
+      idiomas,
+      logros
+    });
+
+  } catch (err) {
+    console.error("Error al obtener el CV completo del profesor:", err.message);
+    res.status(500).json({
+      error: "Error interno al procesar la solicitud. Intenta nuevamente más tarde.",
+    });
+  }
+};
